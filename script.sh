@@ -1,12 +1,14 @@
 #!/bin/bash
 # /usr/local/bin/script.sh
 
-while read -r line
+num=1
+cat ./access.log | while read line
 do
-  [[ ! $line =~ pattern ]] && echo "$line"
+  [[ ! $line = $(cat ./lasttime) ]]
+  num=$(( $num + 1 ))
 done
 
-
+last=$(sed '1, $num d' ./access.log)
 
 # cat ./lasttime
 # 182.254.243.249 - - [15/Aug/2019:00:24:38 +0300] "PROPFIND / HTTP/1.1" 405 173 "-" "-"rt=0.214 uct="-" uht="-" urt="-"
