@@ -160,15 +160,15 @@ fi</pre>
 
 <p>Установим репозиторий EPEL:</p>
 
-<pre>[root@bash sendmaillog]# <b>yum install epel-release -y<b></pre>
+<pre>[root@bash sendmaillog]# <b>yum install epel-release -y</b></pre>
 
 <p>Установим почтовый сервис ssmtp:</p>
 
-<pre>[root@bash sendmaillog]# <b>yum install ssmtp -y<b></pre>
+<pre>[root@bash sendmaillog]# <b>yum install ssmtp -y</b></pre>
 
 <p>Добавим конфиг файл ssmtp-ya.conf (файл ssmtp.conf оставляем как есть):</p>
 
-<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/ssmtp-ya.conf<b></pre>
+<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/ssmtp-ya.conf</b></pre>
 
 <pre># /etc/ssmtp/ssmtp-ya.conf
 # /etc/ssmtp/ssmtp.conf
@@ -191,7 +191,7 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <p>Вносим изменение в файл revaliases:</p>
 
-<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/revaliases<b></pre>
+<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/revaliases</b></pre>
 
 <p>В конец файла добавим строку:</p>
 
