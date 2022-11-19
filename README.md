@@ -341,7 +341,7 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <pre>$ git clone https://github.com/SergSha/bash.git && cd ./bash/</pre>
 
-<p>С помощью текстового редактора в файле sendmaillog/scron.sh в переменной postmaillog заменить на свою электронную почту, на которую будет приходить сообщение логов:</p>
+<p>С помощью текстового редактора в файле sendmaillog/scron.sh в переменной postmaillog вствить свою электронную почту, на которую будет приходить сообщение логов:</p>
 
 <pre>#!/bin/bash
 # /root/sendmaillog/scron.sh
@@ -363,7 +363,7 @@ fi</pre>
 
 <p>Затем запустить команду:</p>
 
-<pre>vagrant up</pre>
+<pre>$ vagrant up</pre>
 
 <p>и в течение часа дождаться получения на электронную почту сообщения.</p>
 
