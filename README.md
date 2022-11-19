@@ -56,7 +56,7 @@ end</pre>
 
 <pre>[user@localhost bash]$ <b>vagrant up</b></pre>
 
-<pre>[user@localhost bash]$ vagrant status
+<pre>[user@localhost bash]$ <b>vagrant status</b>
 Current machine states:
 
 bash                      running (virtualbox)
@@ -73,17 +73,17 @@ simply run `vagrant up`.
 
 <p>Создадим директорий sendmaillog, где будем создавать скрипты по формированию и отправке почтовых сообщений логов:</p>
 
-<pre>[root@bash ~]# mkdir ./sendmaillog
+<pre>[root@bash ~]# <b>mkdir ./sendmaillog</b>
 [root@bash ~]#</pre>
 
 <p>Переходим в этот директорий:</p>
 
-<pre>[root@bash ~]# cd ./sendmaillog
+<pre>[root@bash ~]# <b>cd ./sendmaillog</b>
 [root@bash sendmaillog]#</pre>
 
 <p>Создадим скрипт создания почтового сообщения script.sh:</p>
 
-<pre>[root@bash sendmaillog]# vi ./script.sh
+<pre>[root@bash sendmaillog]# <b>vi ./script.sh</b>
 #!/bin/bash
 # /root/sendmaillog/script.sh
 
@@ -137,7 +137,7 @@ rm -f /tmp/last.log</pre>
 
 <p>Создадим скрипт запуска скрипта формирования сообщения и блокировки повторного запуска scron.sh:</p>
 
-<pre>[root@bash sendmaillog]# vi ./scron.sh
+<pre>[root@bash sendmaillog]# <b>vi ./scron.sh</b>
 #!/bin/bash
 # /root/sendmaillog/scron.sh
 
@@ -154,21 +154,21 @@ fi</pre>
 
 <p>Добавим права на исполнение скриптам:</p>
 
-<pre>[root@bash sendmaillog]# chmod +x ./script.sh</pre>
+<pre>[root@bash sendmaillog]# <b>chmod +x ./script.sh</b></pre>
 
-<pre>[root@bash sendmaillog]# chmod +x ./scron.sh</pre>
+<pre>[root@bash sendmaillog]# <b>chmod +x ./scron.sh<b></pre>
 
 <p>Установим репозиторий EPEL:</p>
 
-<pre>[root@bash sendmaillog]# yum install epel-release -y</pre>
+<pre>[root@bash sendmaillog]# <b>yum install epel-release -y<b></pre>
 
 <p>Установим почтовый сервис ssmtp:</p>
 
-<pre>[root@bash sendmaillog]# yum install ssmtp -y</pre>
+<pre>[root@bash sendmaillog]# <b>yum install ssmtp -y<b></pre>
 
 <p>Добавим конфиг файл ssmtp-ya.conf (файл ssmtp.conf оставляем как есть):</p>
 
-<pre>[root@bash sendmaillog]# vi /etc/ssmtp/ssmtp-ya.conf</pre>
+<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/ssmtp-ya.conf<b></pre>
 
 <pre># /etc/ssmtp/ssmtp-ya.conf
 # /etc/ssmtp/ssmtp.conf
@@ -191,23 +191,15 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <p>Вносим изменение в файл revaliases:</p>
 
-<pre>[root@bash sendmaillog]# vi /etc/ssmtp/revaliases</pre>
+<pre>[root@bash sendmaillog]# <b>vi /etc/ssmtp/revaliases<b></pre>
 
 <p>В конец файла добавим строку:</p>
 
 <pre>root:kibmoney@yandex.ru:smtp.yandex.ru:465</pre>
 
-<p>Заменим отправщик почты, который используется по умолчанию, на настроенный ssmtp:</p>
-
-<pre>[root@bash sendmaillog]# mv /usr/sbin/sendmail /usr/sbin/sendmail.orig</pre>
-
-<p>Создадим симлинк на ssmtp вместо sendmail:</p>
-
-<pre>[root@bash sendmaillog]# ln -s /usr/sbin/ssmtp /usr/sbin/sendmail</pre>
-
 <p>Проверим отправку электронной почты:</p>
 
-<pre>[root@bash sendmaillog]# echo test | /usr/sbin/ssmtp -C /etc/ssmtp/ssmtp-yandex.conf -v -s kibmoney@yandex.ru
+<pre>[root@bash sendmaillog]# <b>echo test | /usr/sbin/ssmtp -C /etc/ssmtp/ssmtp-yandex.conf -v -s kibmoney@yandex.ru</b>
 [<-] 220 myt5-aad1beefab42.qloud-c.yandex.net (Want to use Yandex.Mail for your domain? Visit http://pdd.yandex.ru) 1668886366-CLnSSrAxmO-WkVSFUhc
 [->] EHLO bash
 [<-] 250 ENHANCEDSTATUSCODES
@@ -237,7 +229,7 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <p>Теперь попробуем запустить сам скрипт отправки почтового сообщения:</p>
 
-<pre>[root@bash sendmaillog]# ./scron.sh 
+<pre>[root@bash sendmaillog]# <b>./scron.sh</b>
 [<-] 220 sas1-78334f65778a.qloud-c.yandex.net (Want to use Yandex.Mail for your domain? Visit http://pdd.yandex.ru) 1668889033-rHPs3aHHs0-HDVeq5MW
 [->] EHLO bash
 [<-] 250 ENHANCEDSTATUSCODES
@@ -331,9 +323,9 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <p>Добавил запись в cron, запускающий скрипт отправки почтового сообщения каждый час:</p>
 
-<pre>echo '0 * * * * /root/sendmaillog/scron.sh' >> /var/spool/cron/root</pre>
+<pre>[root@bash sendmaillog]# echo '0 * * * * /root/sendmaillog/scron.sh' >> /var/spool/cron/root</pre>
 
-<p>Дождавшись очередного часа на электронной почте мы получили следующее сообщение:</p>
+<p>Дождавшись очередного часа (в данном случае в 0 часов 00 минут) на электронную почту мы получили следующее сообщение, которое сформировалось с помощью cron:</p>
 
 <img src="./screens/Screenshot from 2022-11-20 00-00-49.png" alt="Log message" />
 
