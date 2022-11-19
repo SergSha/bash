@@ -6,6 +6,6 @@ exit 1
 else
 touch /root/lockfile
 /usr/local/bin/script.sh
-echo "Message log file" | /sbin/ssmtp -v -s trashscum@list.ru -a < /media/message.log
-rm /media/lockfile -f
+echo "Message log file" | /sbin/ssmtp -v -s trashscum@list.ru -a < /root/message.log
+rm /root/lockfile -f
 fi
