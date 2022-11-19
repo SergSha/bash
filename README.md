@@ -156,7 +156,7 @@ fi</pre>
 
 <pre>[root@bash sendmaillog]# <b>chmod +x ./script.sh</b></pre>
 
-<pre>[root@bash sendmaillog]# <b>chmod +x ./scron.sh<b></pre>
+<pre>[root@bash sendmaillog]# <b>chmod +x ./scron.sh</b></pre>
 
 <p>Установим репозиторий EPEL:</p>
 
