@@ -24,6 +24,12 @@ Vagrant.configure("2") do |config|
       box.vm.provision "shell", inline: <<-SHELL
         mkdir -p ~root/.ssh
         cp ~vagrant/.ssh/auth* ~root/.ssh
+        yum install epel-release -y && yum install ssmtp -y
+        mv /vagrant/sendmaillog/ssmtp-ya.conf /etc/ssmtp/
+        echo "root:kibmoney@yandex.ru:smtp.yandex.ru:465" >> /etc/ssmtp/revaliases
+        mv /vagrant/{sendmaillog,access.log} $HOME/
+        chmod +x $HOME/sendmaillog/{script,scron}.sh
+        echo "0 * * * * $HOME/sendmaillog/scron.sh" >> /var/spool/cron/root
       SHELL
 #      if boxconfig[:vm_name] == "bash"
 #        box.vm.provision "ansible" do |ansible|
