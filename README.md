@@ -341,7 +341,7 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <pre>$ git clone https://github.com/SergSha/bash.git && cd ./bash/</pre>
 
-<p>С помощью текстового редактора в файле sendmaillog/scron.sh в переменной postmaillog вствить свою электронную почту, на которую будет приходить сообщение логов:</p>
+<p>С помощью текстового редактора в файле <i>sendmaillog/scron.sh</i> в переменной postmaillog вствить свою электронную почту, на которую будет приходить сообщение логов:</p>
 
 <pre>#!/bin/bash
 # /root/sendmaillog/scron.sh
