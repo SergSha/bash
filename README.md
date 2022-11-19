@@ -141,6 +141,10 @@ rm -f /tmp/last.log</pre>
 #!/bin/bash
 # /root/sendmaillog/scron.sh
 
+# Электронная почта для получения сообщений логов
+postmaillog='kibmoney@yandex.ru'
+
+# Файл блокировки повторного запуска
 lockfile=$HOME/sendmaillog/lockfile
 
 if [[ -e $lockfile ]]; then
@@ -148,7 +152,7 @@ exit 1
 else
 touch $lockfile
 $HOME/sendmaillog/script.sh
-echo "Message log file" | /usr/sbin/ssmtp -C /etc/ssmtp/ssmtp-ya.conf -v -s kibmoney@yandex.ru -a < $HOME/sendmaillog/message.log
+echo "Message log file" | /usr/sbin/ssmtp -C /etc/ssmtp/ssmtp-ya.conf -v -s $postmaillog -a < $HOME/sendmaillog/message.log
 rm $lockfile -f
 fi</pre>
 
@@ -321,11 +325,45 @@ TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt</pre>
 
 <img src="./screens/Screenshot from 2022-11-19 23-18-10.png" alt="Log message" />
 
-<p>Добавил запись в cron, запускающий скрипт отправки почтового сообщения каждый час:</p>
+<p>Добавим запись в cron, запускающий скрипт отправки почтового сообщения каждый час:</p>
 
 <pre>[root@bash sendmaillog]# echo '0 * * * * /root/sendmaillog/scron.sh' >> /var/spool/cron/root</pre>
 
 <p>Дождавшись очередного часа (в данном случае в 0 часов 00 минут) на электронную почту мы получили следующее сообщение, которое сформировалось с помощью cron:</p>
 
 <img src="./screens/Screenshot from 2022-11-20 00-00-49.png" alt="Log message" />
+
+
+
+<h4>Запуск стенда "Bash"</h4>
+
+<p>Запустить стенд с помощью следующей команды:</p>
+
+<pre>$ git clone https://github.com/SergSha/bash.git && cd ./bash/</pre>
+
+<p>С помощью текстового редактора в файле sendmaillog/scron.sh в переменной postmaillog заменить на свою электронную почту, на которую будет приходить сообщение логов:</p>
+
+<pre>#!/bin/bash
+# /root/sendmaillog/scron.sh
+
+# Электронная почта для получения сообщений логов
+postmaillog=<b>'<i>Your@eMail</i>'</b>
+
+# Файл блокировки повторного запуска
+lockfile=$HOME/sendmaillog/lockfile
+
+if [[ -e $lockfile ]]; then
+exit 1
+else
+touch $lockfile
+$HOME/sendmaillog/script.sh
+echo "Message log file" | /usr/sbin/ssmtp -C /etc/ssmtp/ssmtp-ya.conf -v -s $postmaillog -a < $HOME/sendmaillog/message.log
+rm $lockfile -f
+fi</pre>
+
+<p>Затем запустить команду:</p>
+
+<pre>vagrant up</pre>
+
+<p>и в течение часа дождаться получения на электронную почту сообщения.</p>
 
